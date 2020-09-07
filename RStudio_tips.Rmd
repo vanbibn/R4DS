@@ -1,0 +1,26 @@
+---
+title: "RStudio Tips"
+author: "Nathan W. Van Bibber"
+date: "9/7/2020"
+output: html_document
+---
+
+## Shortcuts
+
+Ctrl + Shift + F10 = Restart RStudio
+
+Ctrl + Shift + S = rerun current script
+
+Ctrl + Shift + P = rerun previous
+
+Ctrl + Shift + M = insert pipe operator
+
+Alt + Shift + K = keyboard shortcust menu
+
+`(x <- "Hello World")` = surrounding in parens will print when run
+
+type "xyz" then hit Ctrl + uparrow = list all commands typed before that start with those letters 
+
+Ctrl + Alt + I = insert code chunk in Rmd
+
+Alt + - = insert assignment operator (<-)
