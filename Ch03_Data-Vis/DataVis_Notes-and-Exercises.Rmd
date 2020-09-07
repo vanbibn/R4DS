@@ -9,6 +9,32 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Grammar of Graphics
+
+The grammar of graphics is a formal system for building plots, based on the insight that you can uniquely describe any plot as a combination of:  
+
+1. a dataset  
+2. a geom  
+3. a set of mappings  
+4. a stat  
+5. a position adjustment  
+6. a coordinate system  
+7. a faceting scheme.
+
+Code template
+
+```{r ggplot_template, eval=FALSE}
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(
+     mapping = aes(<MAPPINGS>),
+     stat = <STAT>, 
+     position = <POSITION>
+  ) +
+  <COORDINATE_FUNCTION> +
+  <FACET_FUNCTION>
+```
+
+
 ## First Steps
 
 ```{r}
@@ -105,6 +131,39 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
 ```{r}
 ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut))
+```
+
+## Positions
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_point()
+
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_jitter()
+
+# too much horizontal jitter
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_jitter(width = 20)
+```
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
+  geom_boxplot()
+
+ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
+  geom_boxplot(aes(colour = drv))
+```
+
+```{r}
+nz <- map_data("nz")
+
+ggplot(nz, aes(long, lat, group = group)) +
+  geom_polygon(fill = "white", colour = "black")
+
+ggplot(nz, aes(long, lat, group = group)) +
+  geom_polygon(fill = "white", colour = "black") +
+  coord_quickmap()
 ```
 
 
