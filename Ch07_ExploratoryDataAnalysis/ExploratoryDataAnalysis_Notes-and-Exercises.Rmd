@@ -1,0 +1,24 @@
+---
+title: "Exploratory Data Analysis"
+author: "Nathan W. Van Bibber"
+date: "9/10/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+> "EDA is a state of mind... not a formal process with a strict set of rules"
+
+## Data cleaning
+
+Do the data meet your expectations?
+
+Need all the tools of EDA:
+
+* visualisation
+* transformation
+* modeling
+
+
