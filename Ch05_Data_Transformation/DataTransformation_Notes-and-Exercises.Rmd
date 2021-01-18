@@ -1,0 +1,79 @@
+---
+title: "Data Transformation: Notes and Exercises"
+author: "Nathan W. Van Bibber"
+date: "1/17/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Transformation
+
+```{r me, message=FALSE}
+library(nycflights13)
+library(tidyverse)
+```
+
+### Common problems with floating point numbers:
+
+```{r eval=FALSE}
+sqrt(2) ^ 2 == 2
+#> [1] FALSE
+1 / 49 * 49 == 1
+#> [1] FALSE
+```
+
+Computers use finite precision arithmetic (can’t store an infinite # of digits!) so remember that
+
+* **every number you see is an approximation**. 
+* Instead of relying on `==`, use `near()`
+
+### The `%in%` operator
+
+A useful short-hand is `x %in% y`. This will select every row where x is one of the values in y
+
+### De Morgan’s law
+
+* !(x & y) is the same as !x | !y
+* !(x | y) is the same as !x & !y
+
+### Tip
+
+Whenever you start using complicated, multipart expressions in filter(), consider making them explicit variables instead. That makes it much easier to check your work.
+
+### Missing values
+
+```{r}
+NA > 5
+#> [1] NA
+10 == NA
+#> [1] NA
+NA + 10
+#> [1] NA
+NA / 2
+#> [1] NA
+NA == NA
+#> [1] NA
+```
+
+
+filter() only includes rows where the condition is TRUE; it excludes both FALSE and NA values. If you want to preserve missing values, ask for them explicitly
+
+### Exercises
+
+1. Find all flights that:
+    Had an arrival delay of two or more hours
+    Flew to Houston (IAH or HOU)
+    Were operated by United, American, or Delta
+    Departed in summer (July, August, and September)
+    Arrived more than two hours late, but didn’t leave late
+    Were delayed by at least an hour, but made up over 30 minutes in flight
+    Departed between midnight and 6am (inclusive)
+
+2. Another useful dplyr filtering helper is between(). What does it do? Can you use it to simplify the code needed to answer the previous challenges?
+
+3. How many flights have a missing dep_time? What other variables are missing? What might these rows represent?
+
+4. Why is NA ^ 0 not missing? Why is NA | TRUE not missing? Why is FALSE & NA not missing? Can you figure out the general rule? (NA * 0 is a tricky counterexample!)
