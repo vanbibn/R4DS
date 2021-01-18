@@ -24,3 +24,7 @@ type "xyz" then hit Ctrl + uparrow = list all commands typed before that start w
 Ctrl + Alt + I = insert code chunk in Rmd
 
 Alt + - = insert assignment operator (<-)
+
+Ctrl + Alt + Shift + M: select/highlight all the matching terms in your code
+
+
