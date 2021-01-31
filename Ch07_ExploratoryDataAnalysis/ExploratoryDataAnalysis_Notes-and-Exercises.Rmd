@@ -17,7 +17,7 @@ Do the data meet your expectations?
 
 Need all the tools of EDA:
 
-* visualisation
+* visualization
 * transformation
 * modeling
 
