@@ -24,3 +24,6 @@ type "xyz" then hit Ctrl + uparrow = list all commands typed before that start w
 Ctrl + Alt + I = insert code chunk in Rmd
 
 Alt + - = insert assignment operator (<-)
+
+
+Ctrl + Alt + k = selects all occurrences of the currently selected word/phrase but the only caveat is it is case insensitive. This shortcut is not mentioned in keyboard shortcuts page or cheat sheet.
