@@ -55,3 +55,8 @@ tribble(
 Explicitly `print()` the data frame and control the number of rows (`n`) and the `width` (number of characters ) of the display
 
 Use `problems()` to see the rows causing issues when trying to create a tibble.
+
+Also, clicking on a .csv file in the files tab will allow you to import the data set using the RStudio GUI - good way to learn the different commands 
+
+* set/ change the column types
+* will build the code for you that you can copy and paste into your script
