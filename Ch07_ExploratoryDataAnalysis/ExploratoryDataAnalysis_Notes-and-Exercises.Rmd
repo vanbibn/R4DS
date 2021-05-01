@@ -3,6 +3,8 @@ title: "Exploratory Data Analysis"
 author: "Nathan W. Van Bibber"
 date: "9/10/2020"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -17,8 +19,71 @@ Do the data meet your expectations?
 
 Need all the tools of EDA:
 
-* visualisation
+* visualization
 * transformation
 * modeling
 
+
+```{r}
+library(tidyverse)
+library(nycflights13)
+library(GGally)
+```
+
+
+The `GGally::ggpairs()` function displays a graphic of all the variables plotted against each other. 
+```{r}
+GGally::ggpairs(diamonds)
+
+## or filter down to fewer variables
+diamonds %>% 
+    select(cut, carat) %>% 
+    ggpairs()
+```
+
+
+Note can put the `aes()` on a line by itself too.
+```{r}
+ggplot(diamonds) +
+    aes(x = cut, y = price) +
+    geom_jitter(alpha = 0.05, color = "blue") +
+    geom_boxplot()
+    
+```
+
+```{r}
+diamonds %>% 
+    count(color, cut) %>% 
+    ggplot() +
+    geom_tile(aes(x = color, y = cut, fill = n)) +
+    coord_equal()
+```
+
+Compare the volume, weight, and purity of the diamonds.
+
+```{r}
+diamonds_purity <- 
+    diamonds %>% 
+    mutate(volume = x * y * z,
+           weight = carat * 0.2, # weight in grams: 1 carat ~ 0.2 grams
+           purity = (weight/ volume)/ 0.00352 # pure diamond ~ 3520 kg/m^3
+    )
+ diamonds_purity %>% 
+     select(volume, weight, purity) %>% 
+     ggpairs()
+
+
+diamonds_purity %>% 
+    filter(purity > 1, is.finite(purity))
+
+ggplot(diamonds_purity) +
+    aes(x = weight, y = volume) +
+    geom_point() +
+    geom_abline(slope = 1/0.00352, intercept = 0)
+    geom_smooth()
+
+ggplot(diamonds_purity) +
+    aes(x = purity) + 
+    geom_histogram()
+```
 
