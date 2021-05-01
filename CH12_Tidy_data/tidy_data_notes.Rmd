@@ -1,0 +1,68 @@
+---
+title: "Tidy Data"
+author: "Nathan W. Van Bibber"
+date: "1/30/2021"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Tidy Data
+
+There are three interrelated rules which make a dataset tidy:
+
+* Each variable must have its own column.
+* Each observation must have its own row.
+* Each value must have its own cell.
+
+```{r message=FALSE}
+library(tidyverse)
+library(here)
+```
+
+```{r}
+# source("https://git.io/m4r4ds-untidy-r") # throws an error on tumors_4 (last line)
+source(here("CH12_Tidy_data/untidy.R")) # same as above - corrected
+```
+
+## Important `tidyr` functions
+
+### `pivot_wider()`
+```{r}
+tumors_1 %>% 
+    pivot_wider(names_from = type, values_from = value)
+```
+
+### `pivot_longer()`
+```{r}
+tumors_2a %>% 
+    pivot_longer(cols = -mrn, names_to = "sequence", values_to = "age")
+
+tumors_2b %>% 
+    pivot_longer(cols = -mrn, names_to = "sequence", values_to = "tumor_size")
+
+```
+
+
+### `separate()` 
+```{r}
+tumors_3a %>% 
+    separate(col = age, into = c("sequence", "age"), sep = " - ", convert = TRUE)
+
+tumors_3e %>% 
+    separate(col = tumor_size, into = c("tumor_size", "tumor_unit", "notes"),
+             sep = " ",
+             extra = "merge") %>% 
+    replace_na(replace =  list(notes = "normal"))
+```
+
+
+### `unite()`
+```{r}
+
+```
+
