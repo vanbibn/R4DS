@@ -1,0 +1,62 @@
+---
+title: "Tibbles"
+author: "Nathan W. Van Bibber"
+date: "1/29/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Tibbles
+
+some differences from `data.frame()`
+
+* never converts strings to factors
+* never changes names of variables
+* never creates row names
+* column names can be invalid varaible names
+    - need backticks `` surrounding 
+* With base R data frames, `[` sometimes returns a data frame, and sometimes returns a vector. With tibbles, `[` always returns another tibble.
+    - one of the main reasons an older function might not work with a tibble
+    - `dplyr::filter()` and `dplyr::select()` allow you to solve the same problems with clearer code
+
+```{r message=FALSE}
+library(tidyverse)
+
+tb <- tibble(
+  `:)` = "smile", 
+  ` ` = "space",
+  `2000` = "number"
+)
+tb
+```
+
+
+Use `as_tibble()` to convert a data frame to a tibble
+
+Use `tribble()` for data entry in code. It makes it possible to lay out small amounts of data in easy to read form.
+
+* column headings are defined by formulas (i.e. they start with `~`), and 
+* entries are separated by commas. This 
+* its useful to add a comment line, to make it really clear where the header is.
+
+```{r}
+tribble(
+  ~x, ~y, ~z,
+  #--|--|----
+  "a", 2, 3.6,
+  "b", 1, 8.5
+)
+```
+
+
+Explicitly `print()` the data frame and control the number of rows (`n`) and the `width` (number of characters ) of the display
+
+Use `problems()` to see the rows causing issues when trying to create a tibble.
+
+Also, clicking on a .csv file in the files tab will allow you to import the data set using the RStudio GUI - good way to learn the different commands 
+
+* set/ change the column types
+* will build the code for you that you can copy and paste into your script
